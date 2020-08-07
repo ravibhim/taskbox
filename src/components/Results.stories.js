@@ -6,9 +6,12 @@ import  MockAdapter from 'axios-mock-adapter';
 
 import Results from './Results';
 
-const mock = new MockAdapter(axios);
+// https://github.com/ctimmerm/axios-mock-adapter
+//const mock = new MockAdapter(axios, {delayResponse: 400, onNoMatch: "passthrough"});
+const mock = new MockAdapter(axios, {delayResponse: 400});
 
-const API_REQUEST = 'https://hn.algolia.com/api/v1/search?query=google';
+const GOOGLE_API_REQUEST = 'https://hn.algolia.com/api/v1/search?query=google';
+const YAHOO_API_REQUEST = 'https://hn.algolia.com/api/v1/search?query=yahoo';
 
 export default {
   component: Results,
@@ -17,10 +20,17 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-export const resultsData = {
+export const resultsDataGoogle = {
     hits: [
       {objectID: 'ID1', url: 'URL', title: 'Google Title 1'},
       {objectID: 'ID2', url: 'URL', title: 'Google Title 2'},
+    ]
+};
+
+export const resultsDataYahoo = {
+    hits: [
+      {objectID: 'ID1', url: 'URL', title: 'Yahoo Title 1'},
+      {objectID: 'ID2', url: 'URL', title: 'Yahoo Title 2'},
     ]
 };
 
@@ -28,8 +38,8 @@ storiesOf('Results (Mocked)', module)
   .add('Default', () => {
     // create the mock inside the story
     // if this is outside it'll mess up with other axios instances/requests
-    var mock_response = {...resultsData};
-    mock.onGet(API_REQUEST).reply(200, mock_response);
+    mock.onGet(GOOGLE_API_REQUEST).reply(200, {...resultsDataGoogle})
+      .onGet(YAHOO_API_REQUEST).reply(200, {...resultsDataYahoo});
 
     return <Results />
   });
