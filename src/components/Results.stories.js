@@ -17,25 +17,18 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-export const resultsData = [
-  {
-    objectID: '1',
-    url: 'http://foo.com',
-    title: 'foo.com'
-  }
-];
+export const resultsData = {
+    hits: [
+      {objectID: 'ID1', url: 'URL', title: 'Google Title 1'},
+      {objectID: 'ID2', url: 'URL', title: 'Google Title 2'},
+    ]
+};
 
 storiesOf('Results (Mocked)', module)
   .add('Default', () => {
     // create the mock inside the story
     // if this is outside it'll mess up with other axios instances/requests
-
-    var mock_response = {
-      hits: [
-        {objectID: 'ID1', url: 'URL', title: 'Google Title 1'},
-        {objectID: 'ID2', url: 'URL', title: 'Google Title 2'},
-      ]
-    };
+    var mock_response = {...resultsData};
     mock.onGet(API_REQUEST).reply(200, mock_response);
 
     return <Results />
