@@ -286,6 +286,8 @@ exports[`Storyshots InboxScreen Error 1`] = `
 </div>
 `;
 
+exports[`Storyshots Results Default 1`] = `<ul />`;
+
 exports[`Storyshots Task Archived 1`] = `
 <div
   className="list-item TASK_ARCHIVED"
