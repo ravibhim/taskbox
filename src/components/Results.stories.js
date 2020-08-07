@@ -20,14 +20,14 @@ export default {
   excludeStories: /.*Data$/,
 };
 
-export const resultsDataGoogle = {
+export const resultsGoogleData = {
     hits: [
       {objectID: 'ID1', url: 'URL', title: 'Google Title 1'},
       {objectID: 'ID2', url: 'URL', title: 'Google Title 2'},
     ]
 };
 
-export const resultsDataYahoo = {
+export const resultsYahooData = {
     hits: [
       {objectID: 'ID1', url: 'URL', title: 'Yahoo Title 1'},
       {objectID: 'ID2', url: 'URL', title: 'Yahoo Title 2'},
@@ -38,8 +38,8 @@ storiesOf('Results (Mocked)', module)
   .add('Default', () => {
     // create the mock inside the story
     // if this is outside it'll mess up with other axios instances/requests
-    mock.onGet(GOOGLE_API_REQUEST).reply(200, {...resultsDataGoogle})
-      .onGet(YAHOO_API_REQUEST).reply(200, {...resultsDataYahoo});
+    mock.onGet(GOOGLE_API_REQUEST).reply(200, {...resultsGoogleData})
+      .onGet(YAHOO_API_REQUEST).reply(200, {...resultsYahooData});
 
     return <Results />
   });
